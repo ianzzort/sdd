@@ -15,6 +15,7 @@ and the change history in one folder, so every change follows the same steps.
 ## Layout
 
 ```
+CLAUDE.md                     <- template for the repo-root agent file
 sdd_architecture/
   Instruction.md              <- the brain, read it first
   context/
@@ -47,14 +48,17 @@ plan
 git clone https://github.com/ianzzort/sdd.git /tmp/sdd
 mkdir -p <your-repo>/sdd_architecture
 cp -R /tmp/sdd/Instruction.md /tmp/sdd/context /tmp/sdd/skills <your-repo>/sdd_architecture/
+cp /tmp/sdd/CLAUDE.md <your-repo>/CLAUDE.md
 ```
 
 Then:
 
 1. Fill every `<...>` placeholder in `sdd_architecture/context/Documentation.md`
    with the facts of your project.
-2. Point your agent file (`CLAUDE.md` or the equivalent) at
-   `sdd_architecture/Instruction.md`.
+2. Trim [CLAUDE.md](CLAUDE.md) to what applies. It already points the agent at
+   `sdd_architecture/Instruction.md` and carries the general rules: working
+   mode, code style, dates, commits, tickets, database, seeds, agent cost, and
+   secrets.
 3. Optional: register each skill in `.claude/skills/` as a thin wrapper that
    points to the file in `sdd_architecture/`. The SDD file stays the source of
    truth.
@@ -66,4 +70,5 @@ Then:
 - Every project fact lives in `context/Documentation.md`.
 - Every change writes one entry in `context/Memory.md`.
 - All the files use ASD-STE100 Simplified Technical English: short sentences,
-  active voice, one instruction per sentence.
+  active voice, one instruction per sentence. `CLAUDE.md` is the exception: it
+  is the project agent file, so it goes in the language of the team.
